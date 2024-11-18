@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineSurf</title>
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="icon" href="/images/logo2.jpg" type="image/x-icon" />
+    <style>
+        .hero {
+            background-image: url('/images/back2.jpg');
+            background-size: cover;
+            background-position: center;
+            color: #131720;
+            height: 100vh;
+            width: 100%;
+            overflow-y: auto;
+            position: relative;
+            transition: opacity 0.2s ease;
+            /* Adjusted transition duration */
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            opacity: 1;
+            /* Initially fully visible */
+            transition: opacity 0.2s ease;
+            /* Adjusted transition duration */
+        }
+
+        .hero.hide {
+            opacity: 0;
+            /* Hide the hero section */
+        }
+
+        .hero-content.hide {
+            opacity: 0;
+            /* Hide the hero content */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+        <a href="/" class="logo">
+            CineSurf
+        </a>
+    </header>
+
+    <main class="content" id="main">
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Welcome to CineSurf</h2>
+
+                <p>Your ultimate destination for movie reviews and recommendations.</p>
+                <div class="cta-buttons">
+                    <a href="/login" class="cta-button">Login</a>
+                    <a href="/signup" class="cta-button">Sign Up</a>
+                    <a href="/dummy" class="cta-button">Continue as Guest</a>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Repeat the above div for each movie -->
+    </main>
+    
+    <script src="/scripts/main.js"></script>
+    <script>
+        window.addEventListener('scroll', function () {
+            const hero = document.querySelector('.hero');
+            const heroContent = document.querySelector('.hero-content');
+            const scrollPosition = window.pageYOffset;
+
+            // Calculate opacity based on scroll position
+            const opacity = 1 - (scrollPosition / window.innerHeight);
+            hero.style.opacity = opacity;
+            heroContent.style.opacity = opacity;
+
+            // Add 'hide' class when scrolled beyond certain point
+            if (scrollPosition > window.innerHeight * 0.5) {
+                hero.classList.add('hide');
+                heroContent.classList.add('hide');
+            } else {
+                hero.classList.remove('hide');
+                heroContent.classList.remove('hide');
+            }
+        });
+    </script>
+    <footer>
+        <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CineSurf - Movie Reviews</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+
+    <footer class="footer">
+        <div class="container">
+           <div class="row">
+               <div class="footer-col">
+                   <h4>About CineSurf</h4>
+                   <ul>
+                       <li><a href="#" id="about">About Us</a></li>
+                       <li><a href="#" id="Contact">Contact Us</a></li>
+                       <li><a href="#" id="PrivacyPolicies">Privacy Policy</a></li>
+                       <li><a href="#" id="terms">Terms of Service</a></li>
+                   </ul>
+               </div>
+               <div class="footer-col">
+                   <h4>Follow Us</h4>
+                   <div class="social-links">
+                       <a href="#"><i class="fab fa-facebook-f"></i></a>
+                       <a href="#"><i class="fab fa-twitter"></i></a>
+                       <a href="#"><i class="fab fa-instagram"></i></a>
+                       <a href="#"><i class="fab fa-youtube"></i></a>
+                   </div>
+               </div>
+           </div>
+        </div>
+     </footer>
+   
+   </body>
+   </html>
+   
+   
+   
+   
+       </footer>
+</body>
+
+</html>

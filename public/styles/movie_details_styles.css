@@ -1,0 +1,432 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+.spacediv {
+  padding: 16px;
+}
+
+h1 {
+  text-align: center;
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  padding-top: 80px;
+}
+
+.review-box {
+  background-color: #ffffff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 10px;
+  border-radius: 10px;
+}
+
+.review-content {
+  font-size: 16px;
+  /* This will center align the element */
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 100px;
+  background: linear-gradient(90deg, #ff416c, #ff4b2b);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 100;
+  transition: background 0.5s;
+}
+
+.header:hover {
+  background: linear-gradient(90deg, #000000, #ff416c);
+}
+
+.logo {
+  font-size: 32px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 700;
+  position: relative;
+}
+
+.logo::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+
+.logo:hover::before {
+  width: 100%;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar a {
+  font-size: 18px;
+  color: #fff;
+  font-weight: 500;
+  text-decoration: none;
+  margin-left: 40px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.navbar a::before {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: width 0.3s ease;
+}
+
+.navbar a:hover::before {
+  width: 100%;
+}
+
+.navbar a:hover {
+  color: #f9f9f9;
+}
+
+.navbar form {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-left: 30px;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.navbar form input[type="search"] {
+  width: 0;
+  overflow: hidden;
+  transition: width 0.5s ease;
+  padding: 10px 30px 10px 10px; /* Adjusted padding */
+  border: 0;
+  border-radius: 20px;
+  font-size: 1em;
+  background: rgba(192, 180, 180, 0.5);
+}
+
+.navbar form i {
+  position: absolute;
+  top: 50%;
+  right: 0.25px;
+  transform: translateY(-50%);
+  color: red;
+  font-size: 15px;
+}
+
+.navbar form:hover input[type="search"] {
+  width: 150px;
+  padding: 8px 30px 8px 10px; /* Adjusted padding */
+}
+
+.navbar form:hover i {
+  right: 155px;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* New styles for movie details container */
+.movie-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.movie-details-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.movie-poster-trailer {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+#movie-poster {
+  width: 300px;
+  height: auto;
+  border-radius: 8px; /* Add border-radius for rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+  margin-right: 30px;
+}
+
+#trailer-container {
+  margin-left: 20px;
+}
+
+.overview {
+  width: 100%;
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+.overview h3 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.overview p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #fff;
+}
+
+.reviews-button {
+  background-color: #ff416c; /* Pink background */
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+}
+
+.reviews-button:hover {
+  background-color: #ff4b2b; /* Darker pink on hover */
+}
+
+/* Pseudo-element animation for button */
+.reviews-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0; /* Start with width 0 */
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* End of new styles */
+
+.review_text_box {
+  width: 60%;
+  margin-left: 20%;
+  font-size: medium;
+  background-color: rgb(173, 173, 173);
+}
+
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user-info img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.dropdown-content {
+  color: white;
+  display: none;
+  position: absolute;
+  background-color: #7e3b3b48;
+  min-width: 200px;
+  box-shadow: 8px 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  color: #333;
+}
+
+.dropdown-content a:hover {
+  background-color: #1411119c;
+}
+
+.user-dropdown:hover .dropdown-content {
+  display: block;
+}
+/* Unique Logout button CSS */
+nav .btn-logout-unique {
+  font-weight: bold;
+  padding: 0.8rem 1.5rem;
+  border: 2px solid #fff; /* White border */
+  background-color: transparent; /* Transparent background */
+  color: #fff; /* White text color */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  text-transform: uppercase; /* Convert text to uppercase */
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+nav .btn-logout-unique:hover {
+  background-color: #fff; /* White background on hover */
+  color: rgb(111, 95, 212); /* Slateblue text color on hover */
+}
+
+nav .btn-logout-unique:focus {
+  outline: none; /* Remove focus outline */
+}
+
+/* Unique Logout button icon CSS */
+nav .btn-logout-unique i {
+  margin-right: 5px; /* Add some space between icon and text */
+}
+
+footer {
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+  body {
+    line-height: 1.5;
+    font-family: "Poppins", sans-serif;
+  }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  .container {
+    max-width: 1170px;
+    margin: auto;
+  }
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  ul {
+    list-style: none;
+  }
+  .footer {
+    background-color: #24262b;
+    padding: 70px 0;
+    position: bottom;
+  }
+  .footer-col {
+    width: 25%;
+    padding: 0 15px;
+  }
+  .footer-col h4 {
+    font-size: 18px;
+    color: #ffffff;
+    text-transform: capitalize;
+    margin-bottom: 35px;
+    font-weight: 500;
+    position: relative;
+  }
+  .footer-col h4::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    background-color: #e91e63;
+    height: 2px;
+    box-sizing: border-box;
+    width: 50px;
+  }
+  .footer-col ul li:not(:last-child) {
+    margin-bottom: 10px;
+  }
+  .footer-col ul li a {
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 300;
+    color: #bbbbbb;
+    display: block;
+    transition: all 0.3s ease;
+  }
+  .footer-col ul li a:hover {
+    color: #ffffff;
+    padding-left: 8px;
+  }
+  .footer-col .social-links a {
+    display: inline-block;
+    height: 40px;
+    width: 40px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 0 10px 10px 0;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 50%;
+    color: #ffffff;
+    transition: all 0.5s ease;
+  }
+  .footer-col .social-links a:hover {
+    color: #24262b;
+    background-color: #ffffff;
+  }
+
+  /*responsive*/
+  @media (max-width: 767px) {
+    .footer-col {
+      width: 50%;
+      margin-bottom: 30px;
+    }
+  }
+  @media (max-width: 574px) {
+    .footer-col {
+      width: 100%;
+    }
+  }
+}
+
+
+.tvshow-details-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.tvshow-details-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.tvshow-poster-trailer {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 22px;
+}
+
+#tvshow-poster {
+  width: 300px;
+  height: auto;
+  border-radius: 8px; /* Add border-radius for rounded corners */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+}

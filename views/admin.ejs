@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Portal</title>
+    <style>
+      /* Global Reset */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: #f2f2f2;
+        font-family: Arial, sans-serif;
+        justify-content: center;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        background-color: #fff;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        margin: auto; /* Center horizontally */
+        margin-top: 50px; /* Adjust the top margin as needed */
+      }
+
+      .reviews-container {
+        display: none; /* Hide reviews by default */
+        padding: 20px;
+      }
+
+      .reviews-container h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .reviews-container ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .reviews-container li {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+      }
+
+      .users-container {
+        padding: 20px;
+      }
+
+      .users-container h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .users-container ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .users-container button {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        display: block;
+        width: 100%;
+        text-align: left;
+      }
+
+      .user-details {
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 5px;
+        text-align: left;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 36px;
+        color: #333;
+        margin-bottom: 20px;
+      }
+
+      #showReviewsBtn {
+        margin-bottom: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+        cursor: pointer;
+        border: none;
+        outline: none;
+        width: 100%;
+        text-align: center;
+      }
+
+      /* Form Styles */
+      #updateUserRoleForm {
+        display: none; /* Hide form by default */
+        margin-top: 20px;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        background-color: #f9f9f9;
+      }
+
+      #updateUserRoleForm label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      #updateUserRoleForm select {
+        width: 100%;
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        outline: none;
+      }
+
+      #updateUserRoleForm button {
+        margin-top: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        outline: none;
+      }
+
+      .delete-review-btn {
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        float: right; /* Align to the right */
+      }
+      form{
+        text-align: center;
+        text-decoration: none;
+      }
+      .centered-link {
+        text-align: center;
+        margin-top: 20px; /* Adjust the margin as needed */
+      }
+      form[action="/adminlogout?_method=DELETE"] button[type="submit"] {
+        margin-top: 20px; /* Adjust margin as needed */
+        padding: 10px 20px; /* Adjust padding as needed */
+        border-radius: 5px;
+        background-color: #ff6347; /* Coral color */
+        color: #fff; /* White text color */
+        border: none;
+        cursor: pointer;
+        outline: none;
+        transition: background-color 0.3s;
+      }
+      
+      form[action="/adminlogout?_method=DELETE"] button[type="submit"]:hover {
+        background-color: #ff483d; /* Darker coral color on hover */
+      }
+      
+    </style>
+  </head>
+  <body>
+    
+    <h1>Welcome Admin!</h1>
+    <div class="container">
+      <div class="reviews-container" id="reviewsContainer">
+        <h2>All Reviews:</h2>
+        <ul>
+          <% reviews.forEach(review => { %> <% const user = users.find(user =>
+          user._id.toString() === review.userId.toString()); %>
+          <li>
+            <%= user ? user.name : 'Unknown' %> : <%= review.movieName %> : <%=
+            review.reviewText %>
+            <button
+              class="delete-review-btn"
+              data-review-id="<%= review._id %>"
+            >
+              Delete
+            </button>
+          </li>
+          <% }); %>
+        </ul>
+      </div>
+
+      <button id="showReviewsBtn">Show Reviews</button>
+
+      <table>
+        <tr>
+          <th>
+            <div class="users-container" id="userListContainer">
+              <h2>All User Details:</h2>
+              <div id="userList">
+                <% users.forEach(user => { %> <% if (user.role !== 'superuser'
+                && user.role !== 'admin') { %>
+                <button class="user-button" data-user-id="<%= user._id %>">
+                  <%= user.name %>
+                </button>
+                <% } %> <% }); %>
+              </div>
+            </div>
+          </th>
+
+          <th style="margin-top: 0px">
+            <div class="show_details"></div>
+            <div class="user-details-container" id="userDetailsContainer"></div>
+          </th>
+
+          <th>
+            <!-- Form to update user's role -->
+            <form id="updateUserRoleForm">
+              <label for="role">Update User Role:</label>
+              <select id="role" name="role">
+                <option value="normaluser">Normal User</option>
+                <option value="guest">Guest</option>
+              </select>
+              <button type="submit">Update</button>
+            </form>
+          </th>
+        </tr>
+      </table>
+    </div>
+     
+    <div class="centered-link">
+      <a href="/index" class="homepageR">Home</a>
+    </div>
+    
+    <form action="/adminlogout?_method=DELETE" method="POST">
+      
+      <button type="submit">Logout</button>
+    </form>
+
+    <script src="/scripts/admin.js">
+     
+    </script>
+  </body>
+</html>

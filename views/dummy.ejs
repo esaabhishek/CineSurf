@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CineSurf</title>
+  <link rel="stylesheet" href="/styles/styles.css">   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <link rel="icon" href="/images/logo2.jpg" type="image/x-icon" />
+</head>
+
+<body>
+
+  <header class="header">
+    <a href="/" class="logo">CineSurf</a>
+
+    <nav class="navbar">
+      <a href="#">Popular</a>
+      <a href="#">Movies</a>
+      <a href="#">TV Shows</a>
+      <form id="form">
+        <input type="search" placeholder="Search here..." id="query">
+        <i class="fa fa-search"></i>
+      </form>
+      <div class="user-dropdown">
+        <div class="user-info">
+          <img src="/images/default-user-pic.png" alt="User Picture">
+          <div class="user-details">
+            <span class="username">Guest</span>
+          </div>
+        </div>
+      </div>
+
+    </nav>
+  </header>
+
+
+  <div class="spacediv"></div>
+
+  <main id="main">
+    <div class="movie">
+      <img src="/images/blackpanther.jpg" alt="image">
+
+      <div class="movie-info">
+        <h3>Movie Title</h3>
+        <span class="green">9.8</span>
+      </div>
+
+      <div class="overview">
+        <h3>overview</h3>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum similique officiis nam numquam molestias.
+        Incidunt et suscipit, inventore nemo perferendis omnis dolorum tenetur nam vel, mollitia itaque iusto asperiores
+        ipsam?
+      </div>
+    </div>
+  </main>
+
+
+  <script>
+    const API_KEY = 'api_key=1a43f4f5121d723457a85e7db44e3404';
+    const BASE = 'https://api.themoviedb.org/3/';
+    const API_URL = `${BASE}discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&${API_KEY}`;
+    const IMG_PATH = 'https://image.tmdb.org/t/p/w1280';
+
+    const form = document.getElementById('form');
+
+    getMovies(API_URL);
+
+    function getMovies(url) {
+      fetch(url)
+        .then(res => res.json())
+        .then(data => {
+          console.log(data.results);
+          showMovies(data.results);
+        });
+    }
+    // Function to check if user is authenticated
+    function checkAuthenticated(req, res, next) {
+      if (req.isAuthenticated()) {
+        return next();
+      }
+      res.redirect("/login");
+    }
+
+    // Function to check if user is not authenticated
+    function checkNotAuthenticated(req, res, next) {
+      if (req.isAuthenticated()) {
+        return res.redirect("/");
+      }
+      next();
+    }
+    function showMovies(data) {
+      const mainElement = document.getElementById('main');
+
+      mainElement.innerHTML = '';
+
+      data.forEach(movie => {
+        const movieEl = document.createElement("div");
+        movieEl.classList.add('movie');
+        movieEl.innerHTML = `
+            <img src="${IMG_PATH}${movie.poster_path}" alt="${movie.title}">
+            <div class="movie-info">
+                <h3>${movie.title}</h3>
+                <span class="${getColor(movie.vote_average)}">${movie.vote_average}</span>
+            </div>
+            <div class="overview">
+                <h3>Overview</h3>
+                ${movie.overview}
+            </div>
+        `;
+        mainElement.appendChild(movieEl);
+        // Add event listener to each movie element
+        movieEl.addEventListener('click', () => {
+          alert("Please login to view more details about this movie.");
+          window.location.href = "/login"; // Redirect to the login page
+        });
+      });
+    }
+
+    function getColor(vote) {
+      if (vote >= 8) {
+        return 'green';
+      }
+
+      else if (vote >= 5) {
+        return 'orange';
+      }
+
+      else {
+        return 'red';
+      }
+    }
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const searchTerm = document.getElementById('query').value;
+
+      if (searchTerm) {
+        getMovies(`${BASE}search/movie?query=${searchTerm}&${API_KEY}`);
+      } else {
+        getMovies(API_URL);
+      }
+    });
+
+    app.get("/index", checkAuthenticated, async (req, res) => {
+      try {
+        const user = await User.findById(req.user._id);
+        if (user) {
+          res.render("index", { name: user.name, email: user.email });
+        } else {
+          res.redirect("/login");
+        }
+      } catch (error) {
+        console.error(error);
+        res.redirect("/login");
+      }
+    });
+
+
+
+
+  </script>
+  <footer>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>CineSurf - Movie Reviews</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+</head>
+<body>
+
+  <footer class="footer">
+    <div class="container">
+       <div class="row">
+           <div class="footer-col">
+               <h4>About CineSurf</h4>
+               <ul>
+                   <li><a href="#" id="about">About Us</a></li>
+                   <li><a href="#" id="Contact">Contact Us</a></li>
+                   <li><a href="#" id="PrivacyPolicies">Privacy Policy</a></li>
+                   <li><a href="#" id="terms">Terms of Service</a></li>
+               </ul>
+           </div>
+           <div class="footer-col">
+               <h4>Follow Us</h4>
+               <div class="social-links">
+                   <a href="#"><i class="fab fa-facebook-f"></i></a>
+                   <a href="#"><i class="fab fa-twitter"></i></a>
+                   <a href="#"><i class="fab fa-instagram"></i></a>
+                   <a href="#"><i class="fab fa-youtube"></i></a>
+               </div>
+           </div>
+       </div>
+    </div>
+ </footer>
+
+</body>
+</html>
+
+
+
+
+   </footer>
+</body>
+
+</html>
